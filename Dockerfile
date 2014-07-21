@@ -13,7 +13,7 @@ ADD     ./sql/data.sql /tmp/data.sql
 ADD     ./sql/images.sql /tmp/images.sql
 
 RUN     /usr/bin/mysqld_safe & sleep 10s; mysql -uroot -e "create database zabbix character set utf8 collate utf8_bin;"
-RUN     /usr/bin/mysqld_safe & sleep 10s; mysql -uroot -e "grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix'; flush privileges;"
+RUN     /usr/bin/mysqld_safe & sleep 10s; mysql -uroot -e "grant all privileges on zabbix.* to zabbix@'%' identified by 'zabbix'; flush privileges;"
 
 RUN     /usr/bin/mysqld_safe & sleep 10s; mysql -uroot zabbix < /tmp/schema.sql
 RUN     /usr/bin/mysqld_safe & sleep 10s; mysql -uroot zabbix < /tmp/images.sql
